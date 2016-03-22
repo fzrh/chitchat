@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'thin'
 gem 'devise'
+gem 'mailboxer', github: 'mailboxer/mailboxer'
 
 group :development, :test do
   gem 'byebug'

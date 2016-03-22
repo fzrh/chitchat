@@ -6,3 +6,10 @@
     <p><%= receipt.message.body %></p>
   </section>
 <% end %>
+
+<%= form_tag conversation_messages_path(@conversation), method: :post do %>
+  <section>
+    <%= text_area_tag :body %>
+  </section>
+  <%= submit_tag 'Submit' %>
+<% end %>

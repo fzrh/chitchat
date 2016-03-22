@@ -1,15 +1,18 @@
-<h1><%= @conversation.subject %></h1>
-
-<% @conversation.receipts_for(current_user).each do |receipt| %>
-  <section>
-    <p><%= receipt.message.sender.name %> commented:</p>
-    <p><%= receipt.message.body %></p>
-  </section>
-<% end %>
-
-<%= form_tag conversation_messages_path(@conversation), method: :post do %>
-  <section>
-    <%= text_area_tag :body %>
-  </section>
-  <%= submit_tag 'Submit' %>
-<% end %>
+<section class='container'>
+    <section class='row'>
+      <section class='twelve columns'>
+        <h1><%= @conversation.subject %></h1>
+        <p>Signed In As: <%= current_user.email %>
+        <% @conversation.receipts_for(current_user).each do |receipt| %>
+          <section>
+            <p><%= receipt.message.sender.name %> commented:</p>
+            <p><%= receipt.message.body %></p>
+          </section>
+        <% end %>
+        <%= form_tag conversation_messages_path(@conversation), method: :post do %>
+          <%= text_area_tag :body, nil, placeholder: 'Your reply', class: 'u-full-width' %>
+          <%= submit_tag 'Submit', class: 'button-primary' %>
+        <% end %>
+      </section>
+    </section>
+</section>

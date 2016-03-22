@@ -1,0 +1,22 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+test:
+  <<: *default
+  database: chitchat_test
+
+development:
+  <<: *default
+  database: chitchat_development
+
+production:
+  <<: *default
+  database: chitchat_production
+  username: chitchat
+  password: <%= ENV['CHITCHAT_DATABASE_PASSWORD'] %>

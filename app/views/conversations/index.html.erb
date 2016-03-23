@@ -3,12 +3,23 @@
       <section class='twelve columns'>
         <h1>All Conversations</h1>
         <p>Signed In As: <%= current_user.email %> | <%= link_to 'Home', root_path %>
+        <hr/>
+          All Conversations (<%= current_user.mailbox.conversations.count %>) |
+          Inbox (<%= current_user.mailbox.inbox.unread(current_user).count %>) |
+          Sent (<%= current_user.mailbox.sentbox.count %>) |
+          Trash (<%= current_user.mailbox.trash.count %>)
+        <hr/>
+        Total: <%= @conversations.count %>
         <% @conversations.each do |conversation| %>
           <ul>
-            <li><%= link_to conversation.subject, conversation_path(conversation) %></li>
+            <% if conversation.is_unread?(current_user)%>
+              <li><strong><%= link_to conversation.subject, conversation_path(conversation) %></strong></li>
+            <% else %>
+              <li><%= link_to conversation.subject, conversation_path(conversation) %></li>
+            <% end %>
           </ul>
         <% end %>
-        <%= link_to 'New Conversation', new_conversation_path, class: 'button' %>
+        <p><%= link_to 'New Conversation', new_conversation_path, class: 'button' %></p>
       </section>
     </section>
 </section>
